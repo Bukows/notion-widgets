@@ -9,9 +9,9 @@
 
 <script>
 function getWeather() {
-  const apiKey = f7047c70a2948bd444ce10c89c339e76 //Kommentar
-  const city = document.getElementById("Istanbul").value;  //("city-input").value;
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f7047c70a2948bd444ce10c89c339e76`;
+  const apiKey = f7047c70a2948bd444ce10c89c339e76; // replace with your OpenWeatherMap API key
+  const city = document.getElementById("city-input").value;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
   fetch(url)
     .then(response => response.json())
@@ -34,13 +34,5 @@ function getWeather() {
       console.error(error);
     });
 }
-
-const cityInput = document.getElementById("city-input");
-cityInput.addEventListener("keydown", function(event) {
-  if (event.keyCode === 13) { // if the return key is pressed
-    event.preventDefault(); // prevent the form from submitting
-    getWeather(); // call the getWeather() function
-  }
-});
 </script>
 
