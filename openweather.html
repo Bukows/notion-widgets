@@ -1,0 +1,37 @@
+<div class="notion-widget">
+  <div class="notion-widget-header">Weather Forecast</div>
+  <div class="notion-widget-content">
+    <input type="text" id="city-input" placeholder="Enter city name">
+    <button onclick="getWeather()">Get Weather</button>
+    <div id="weather-result"></div>
+  </div>
+</div>
+
+<script>
+function getWeather() {
+  const apiKey = f7047c70a2948bd444ce10c89c339e76
+  const city = document.getElementById("city-input").value;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const weather = data.weather[0];
+      const temperature = data.main.temp;
+      const description = weather.description;
+      const iconUrl = `http://openweathermap.org/img/w/${weather.icon}.png`;
+
+      const result = document.getElementById("weather-result");
+      result.innerHTML = `
+        <img src="${iconUrl}" alt="${description}">
+        <p>${temperature} °C</p>
+        <p>${description}</p>
+      `;
+    })
+    .catch(error => {
+      const result = document.getElementById("weather-result");
+      result.innerHTML = "Unable to get weather. Please try again later.";
+      console.error(error);
+    });
+}
+</script>
